@@ -1,0 +1,34 @@
+<mat-drawer-container hasBackdrop="true">
+  <mat-drawer #drawer mode="over">
+    <mat-toolbar color="primary">
+      <span>Vaxsys</span>
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-toolbar>
+    <div class="flex column no-header-height">
+      <mat-nav-list>
+        <mat-list-item [routerLink]="['']">Home</mat-list-item>
+        <mat-list-item [routerLink]="['/admin']">Admin</mat-list-item>
+        <mat-list-item [routerLink]="['/contact-us']">Contact Us</mat-list-item>
+      </mat-nav-list>
+      <div class="spacer"></div>
+      <button mat-raised-button color="primary" style="width: 100%; border-radius: 0px;" [routerLink]="['/login']">
+        Login
+      </button>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Vaxsys</span>
+      <span class="example-spacer"></span>
+    </mat-toolbar>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

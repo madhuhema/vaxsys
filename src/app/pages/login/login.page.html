@@ -1,1 +1,21 @@
-<p>login works!</p>
+<div class="container">
+  <div style="margin: 5%; padding: 5%; border: 1px solid rgb(68, 68, 68); height: 50%; box-shadow: 2px 2px 4px rgb(68, 68, 68);">
+    <h1 class="text-center">Admin Login</h1>
+    <form [formGroup]="form">
+      <formly-form
+        [model]="model"
+        [fields]="fields"
+        [options]="options"
+        [form]="form"
+      ></formly-form>
+      <button
+        mat-raised-button
+        style="width: 100%; margin-top: 5px"
+        color="primary"
+        (click)="loginUser()"
+      >
+        Login
+      </button>
+    </form>
+  </div>
+</div>
