@@ -7,6 +7,9 @@ const routes: Routes = [{
 }, {
   path: '',
   loadChildren: () => import('./layouts/login/login.module').then(login => login.LoginModule)
+}, {
+  path: 'user',
+  loadChildren: () => import('./layouts/user/user.module').then(user => user.UserModule)
 }];
 
 @NgModule({

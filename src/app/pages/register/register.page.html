@@ -1,0 +1,42 @@
+<div class="container">
+  <div
+    style="
+      margin: 5%;
+      padding: 5%;
+      border: 1px solid rgb(68, 68, 68);
+      height: 50%;
+      box-shadow: 2px 2px 4px rgb(68, 68, 68);
+      flex-basis: 60%;
+    "
+  >
+    <div class="flex">
+      <div class="flex-1"></div>
+      <div>
+        <button
+          mat-button
+          style="width: 100%; margin-top: 10px"
+          [routerLink]="['/login']"
+        >
+          Already a User?
+        </button>
+      </div>
+    </div>
+    <h1 class="text-center">Registration</h1>
+    <form [formGroup]="registerForm">
+      <formly-form
+        [model]="registerModel"
+        [fields]="registerFields"
+        [options]="options"
+        [form]="registerForm"
+      ></formly-form>
+      <button
+        mat-raised-button
+        style="width: 100%; margin-top: 5px"
+        color="primary"
+        (click)="register()"
+      >
+        Register
+      </button>
+    </form>
+  </div>
+</div>

@@ -8,12 +8,13 @@ import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
   styleUrls: ['./login.page.css']
 })
 export class LoginPage implements OnInit {
+  options: FormlyFormOptions = {};
+
   form = new FormGroup({});
   model: any = {};
-  options: FormlyFormOptions = {};
   fields: FormlyFieldConfig[] = [
     {
-      key: 'user',
+      key: 'email',
       type: 'input',
       templateOptions: {
         label: 'Email Address',
@@ -34,6 +35,7 @@ export class LoginPage implements OnInit {
       },
     },
   ];
+
   constructor() { }
 
   ngOnInit(): void {
