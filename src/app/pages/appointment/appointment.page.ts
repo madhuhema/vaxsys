@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Appointment } from 'src/app/@core/models/appointment';
+import { ApiService } from 'src/app/@core/services/api.service';
 
 @Component({
   selector: 'app-appointment',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppointmentPage implements OnInit {
 
-  constructor() { }
+  appointments: Appointment[] = [];
+  
+  constructor(private http: ApiService) {
+
+  }
 
   ngOnInit(): void {
+    this.http.myAppointments().subscribe(appointments => this.appointments = appointments);
   }
 
 }

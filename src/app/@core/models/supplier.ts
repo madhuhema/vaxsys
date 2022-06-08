@@ -1,5 +1,5 @@
 export interface Supplier {
-    ID: number;
+    id: number;
     name: string;
     vaccineID: number;
     location: string;

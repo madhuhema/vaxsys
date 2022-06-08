@@ -1,6 +1,6 @@
 export interface Appointment {
     vaccineSupplierId: number
-    patientId: number
-    Date: String
+    patientId?: number
+    vacDate: String
     slotID: number
 }

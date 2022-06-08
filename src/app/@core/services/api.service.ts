@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Appointment } from '../models/appointment';
+import { Slot } from '../models/slot';
 import { Supplier } from '../models/supplier';
 import { User } from '../models/user';
 import { Vaccine } from '../models/vaccine';
@@ -14,8 +15,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  login(emailid: string, password: string): Observable<number> {
-    return this.http.post<number>(this.url + "/login", { emailid, password });
+  login(emailId: string, password: string): Observable<number> {
+    return this.http.post<number>(this.url + "/login", { emailId, password });
   }
 
   register(user: User) {
@@ -23,8 +24,8 @@ export class ApiService {
   }
 
   bookAnAppointment(appointment: Appointment) {
-    appointment.patientId = this.getUserId();
-    return this.http.post<number>(this.url, appointment);
+    const userId = this.getUserId();
+    return this.http.post<number>(`${this.url}/patient/${userId}/slot`, appointment);
   }
 
   cancelAppointment(slotID: number) {
@@ -34,7 +35,7 @@ export class ApiService {
 
   myAppointments() {
     let userId = this.getUserId();
-    return this.http.get(`${this.url}/patient/${userId}/slot`)
+    return this.http.get<Array<Appointment>>(`${this.url}/patient/${userId}/slot`)
   }
 
   getVaccines(): Observable<Array<Vaccine>> {
@@ -43,6 +44,11 @@ export class ApiService {
 
   getHospitals(vaccineId: number): Observable<Array<Supplier>> {
     return this.http.post<Array<Supplier>>(`${this.url}/dashboard/hospitalByVacId?vaccineId=${vaccineId}`, vaccineId);
+  }
+
+  getSlotsByFilters(date: string, vaccineSupplierId: string) {
+    debugger;
+    return this.http.get<Slot[]>(`${this.url}/dashboard/slotsByFilters?selectedDate=${date}&patientId=${this.getUserId()}&vaccineSupplierId=${vaccineSupplierId}`)
   }
 
   getVaccineAndDiseaseList() {
