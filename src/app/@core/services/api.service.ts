@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Appointment } from '../models/appointment';
+import { Appointment, AppointmentResponse } from '../models/appointment';
 import { Slot } from '../models/slot';
 import { Supplier } from '../models/supplier';
 import { User } from '../models/user';
@@ -35,7 +35,7 @@ export class ApiService {
 
   myAppointments() {
     let userId = this.getUserId();
-    return this.http.get<Array<Appointment>>(`${this.url}/patient/${userId}/slot`)
+    return this.http.get<Array<AppointmentResponse>>(`${this.url}/patient/${userId}/slot`)
   }
 
   getVaccines(): Observable<Array<Vaccine>> {

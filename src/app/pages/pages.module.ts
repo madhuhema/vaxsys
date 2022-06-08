@@ -16,6 +16,7 @@ import { BookPage } from './book/book.page';
 import { CoreModule } from '../@core/core.module';
 import { ApiService } from '../@core/services/api.service';
 import { ToastService } from '../@core/services/toast.service';
+import { MomentModule } from 'ngx-moment';
 
 
 
@@ -45,7 +46,8 @@ export function patternValidation(err: any, field: FormlyFieldConfig) {
       ],
     }),
     FormlyMaterialModule,
-    RouterModule
+    RouterModule,
+    MomentModule
   ],
   providers: [
     ApiService,

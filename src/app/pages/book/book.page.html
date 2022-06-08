@@ -8,8 +8,15 @@
       box-shadow: 2px 2px 4px rgb(68, 68, 68);
     "
   >
-    <h1 class="text-center">Book an appointment</h1>
-    <div>{{this.model | json}}</div>
+    <div class="flex">
+      <h1 class="text-center flex-1">Book your Appointment</h1>
+      <div>
+        <button mat-stroked-button color="primary" [routerLink]="'/user/appointments'">
+          <mat-icon>event</mat-icon> My Appointments
+        </button>
+      </div>
+    </div>
+    <!-- <div>{{this.model | json}}</div> -->
     <form [formGroup]="form">
       <formly-form
         [model]="model"
