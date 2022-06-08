@@ -22,6 +22,8 @@
     "@angular/router": "~13.3.0",
     "@ngx-formly/core": "^5.12.1",
     "@ngx-formly/material": "^5.12.1",
+    "moment": "^2.29.3",
+    "ngx-moment": "^6.0.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

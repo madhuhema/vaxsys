@@ -1,0 +1,19 @@
+.bg {
+    background-image: url('src/assets/vaccine.jpg');
+    height: inherit;
+    width: 100%;
+    background-size: cover;
+    background-position: top;
+}
+
+.grid {
+    position: relative;
+    display: grid;
+    width: 100vw;
+    height: calc(100vh - 64px);
+    grid-template-columns: 1fr 1fr;
+}
+
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+    padding: 10px 15px;
+}
