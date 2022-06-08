@@ -13,3 +13,7 @@
     height: calc(100vh - 64px);
     grid-template-columns: 1fr 1fr;
 }
+
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+    padding: 10px 15px;
+}

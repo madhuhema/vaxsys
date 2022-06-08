@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ApiService } from 'src/app/@core/services/api.service';
 
 @Component({
   selector: 'app-user',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserLayout implements OnInit {
 
-  constructor() { }
+  constructor(private http: ApiService, private router: Router) { }
 
   ngOnInit(): void {
+  }
+  logout() {
+    this.http.removeUserId();
+    this.router.navigateByUrl('/');
   }
 
 }

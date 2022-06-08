@@ -5,6 +5,7 @@ import { DashboardPage } from 'src/app/pages/admin/dashboard/dashboard.page';
 import { ContactPage } from 'src/app/pages/contact/contact.page';
 import { HomePage } from 'src/app/pages/home/home.page';
 import { LoginPage } from 'src/app/pages/login/login.page';
+import { VaccinelistPage } from 'src/app/pages/vaccinelist/vaccinelist.page';
 import { HomeLayout } from './home.layout';
 
 const routes: Routes = [{
@@ -25,6 +26,9 @@ const routes: Routes = [{
   {
     path: 'admin',
     component: DashboardPage
+  }, {
+    path: 'vaccineinfo',
+    component: VaccinelistPage
   }]
 }];
 

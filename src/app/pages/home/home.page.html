@@ -1,4 +1,4 @@
-<div class="grid">
+<div class="grid w-100">
   <div class="bg"></div>
   <div class="w-100">
     <div class="flex column center h-100" style="padding: 20px">
@@ -7,21 +7,22 @@
         color="primary"
         class="w-100"
         style="margin-bottom: 10px"
+        [routerLink]="['/user']"
       >
         <mat-icon>event</mat-icon> Book an appointment
       </button>
-      <button mat-raised-button class="w-100" style="margin-bottom: 10px" [routerLink]="['/login']">
-        <mat-icon>login</mat-icon> login
-      </button>
-      <button mat-raised-button class="w-100" [routerLink]="['/register']">
-        <mat-icon>account_box</mat-icon> Register
-      </button>
+        <button
+        *ngIf="!http.getUserId()"
+          mat-raised-button
+          class="w-100"
+          style="margin-bottom: 10px"
+          [routerLink]="['/login']"
+        >
+          <mat-icon>login</mat-icon> login
+        </button>
+        <button mat-raised-button class="w-100" [routerLink]="['/register']" *ngIf="!http.getUserId()">
+          <mat-icon>account_box</mat-icon> Register
+        </button>
     </div>
   </div>
-</div>
-<div class="flex w-100">
-  <mat-toolbar color="primary">
-    <mat-icon>vaccines</mat-icon>
-    <div class="w-100 text-center">Available Vaccine Data</div>
-  </mat-toolbar>
 </div>

@@ -1,5 +1,5 @@
-<div class="container">
-  <div>
+<div class="container w-100">
+  <div style="min-width: 60%">
     <div class="flex" style="margin-top: 5%">
       <h1 class="text-center flex-1">Your Appointments</h1>
       <div class="">
@@ -8,48 +8,53 @@
         </button>
       </div>
     </div>
-    <table mat-table [dataSource]="appointments" class="mat-elevation-z8">
-      <ng-container matColumnDef="patientSlotId">
-        <th mat-header-cell *matHeaderCellDef>ID</th>
-        <td mat-cell *matCellDef="let element">{{element.patientSlotId}}</td>
-      </ng-container>
+    <div *ngIf="appointments && appointments.length > 0;else noAppointments">
+      <table mat-table [dataSource]="appointments" class="mat-elevation-z8">
+        <ng-container matColumnDef="patientSlotId">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let element">{{element.patientSlotId}}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="supplierLocation">
-        <th mat-header-cell *matHeaderCellDef>Supplier Address</th>
-        <td mat-cell *matCellDef="let element">{{element.supplierLocation}}</td>
-      </ng-container>
+        <ng-container matColumnDef="supplierLocation">
+          <th mat-header-cell *matHeaderCellDef>Supplier Address</th>
+          <td mat-cell *matCellDef="let element">
+            {{element.supplierLocation}}
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="vacDate">
-        <th mat-header-cell *matHeaderCellDef>Appointment Date</th>
-        <td mat-cell *matCellDef="let element">
-          {{element.vacDate | amCalendar}}
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="vacDate">
+          <th mat-header-cell *matHeaderCellDef>Appointment Date</th>
+          <td mat-cell *matCellDef="let element">
+            {{element.vacDate | amCalendar}}
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="slotTime">
-        <th mat-header-cell *matHeaderCellDef>Slot Time</th>
-        <td mat-cell *matCellDef="let element">{{element.slotTime}}</td>
-      </ng-container>
+        <ng-container matColumnDef="slotTime">
+          <th mat-header-cell *matHeaderCellDef>Slot Time</th>
+          <td mat-cell *matCellDef="let element">{{element.slotTime}}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="vaccineName">
-        <th mat-header-cell *matHeaderCellDef>Vaccine</th>
-        <td mat-cell *matCellDef="let element">{{element.vaccineName}}</td>
-      </ng-container>
+        <ng-container matColumnDef="vaccineName">
+          <th mat-header-cell *matHeaderCellDef>Vaccine</th>
+          <td mat-cell *matCellDef="let element">{{element.vaccineName}}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Actions</th>
-        <td mat-cell *matCellDef="let element">
-          <button
-            mat-icon-button
-            (click)="deleteAppointment(element.patientSlotId)"
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let element">
+            <button
+              mat-icon-button
+              (click)="deleteAppointment(element.patientSlotId)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
   </div>
 </div>
+<ng-template #noAppointments>No Appointments Scheduled</ng-template>

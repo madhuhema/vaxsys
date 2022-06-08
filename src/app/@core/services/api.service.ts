@@ -6,6 +6,7 @@ import { Slot } from '../models/slot';
 import { Supplier } from '../models/supplier';
 import { User } from '../models/user';
 import { Vaccine } from '../models/vaccine';
+import { VaccineInfo } from '../models/vaccineinfo';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +53,7 @@ export class ApiService {
   }
 
   getVaccineAndDiseaseList() {
-
+    return this.http.get<VaccineInfo[]>(`${this.url}/dashboard/vaccineInfo`)
   }
 
   getUserId(): number {
@@ -62,5 +63,7 @@ export class ApiService {
   setUserId(userId: number) {
     localStorage.setItem('userId', userId.toString());
   }
-
+  removeUserId() {
+    localStorage.removeItem('userId')
+  }
 }

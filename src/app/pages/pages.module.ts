@@ -17,6 +17,7 @@ import { CoreModule } from '../@core/core.module';
 import { ApiService } from '../@core/services/api.service';
 import { ToastService } from '../@core/services/toast.service';
 import { MomentModule } from 'ngx-moment';
+import { VaccinelistPage } from './vaccinelist/vaccinelist.page';
 
 
 
@@ -34,6 +35,7 @@ export function patternValidation(err: any, field: FormlyFieldConfig) {
     RegisterPage,
     AppointmentPage,
     BookPage,
+    VaccinelistPage,
   ],
   imports: [
     CommonModule,
