@@ -1,6 +1,6 @@
 export interface Vaccine {
-    ID: number;
-    name: String;
+    id: number;
+    name: string;
     noOfDoses: number;
     diseaseID: number;
 }

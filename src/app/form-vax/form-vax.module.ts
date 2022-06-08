@@ -1,9 +1,13 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
+import { MaterialModule } from '../material/material.module';
+import { AutocompleteComponent } from './autocomplete/autocomplete.component';
+import { AutoselectComponent } from './autoselect/autoselect.component';
 
 
 
@@ -13,14 +17,14 @@ export function patternValidation(err: any, field: FormlyFieldConfig) {
 
 export function fieldMatchValidator(control: AbstractControl) {
 
-  const { Password, ConfirmPassword } = control?.value || {};
+  const { password, confirmPassword } = control?.value || {};
 
   // avoid displaying the message error when values are empty
-  if (!ConfirmPassword || !Password) {
+  if (!confirmPassword || !password) {
     return null;
   }
 
-  if (ConfirmPassword === Password) {
+  if (confirmPassword === password) {
     return null;
   }
 
@@ -29,10 +33,19 @@ export function fieldMatchValidator(control: AbstractControl) {
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    AutocompleteComponent,
+    AutoselectComponent
+  ],
   imports: [
+    CommonModule,
+    MaterialModule,
     ReactiveFormsModule,
     FormlyModule.forRoot({
+      types: [{
+        name: 'autocomplete',
+        component: AutocompleteComponent
+      }],
       validationMessages: [
         { name: 'required', message: 'This field is required' },
         { name: 'pattern', message: patternValidation }
@@ -43,7 +56,7 @@ export function fieldMatchValidator(control: AbstractControl) {
     }),
     FormlyMaterialModule,
     MatNativeDateModule,
-    FormlyMatDatepickerModule,
+    FormlyMatDatepickerModule
   ],
   exports: [
     ReactiveFormsModule,

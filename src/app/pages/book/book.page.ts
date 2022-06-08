@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
+import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
+import { firstValueFrom, from, of } from 'rxjs';
+import { ApiService } from 'src/app/@core/services/api.service';
 
 @Component({
   selector: 'app-book',
@@ -13,6 +15,28 @@ export class BookPage implements OnInit {
   form = new FormGroup({});
   model: any = {};
   fields: FormlyFieldConfig[] = [{
+    key: 'Vaccine',
+    type: 'autocomplete',
+    templateOptions: {
+      label: 'Vaccine',
+      placeholder: 'Vaccine',
+      filter: async (name: string) => {
+        const vaccines = await this.filterVaccines(name);
+        return vaccines;
+      }
+    }
+  }, {
+    key: 'VaccineSupplierId',
+    type: 'autocomplete',
+    templateOptions: {
+      label: 'Hospital',
+      placeholder: 'Hospital',
+      filter: (name: string) => {
+        return from(this.filterHospital(name));
+      }
+    },
+    hideExpression: '!model?.Vaccine'
+  }, {
     key: 'Date',
     type: 'datepicker',
     templateOptions: {
@@ -32,15 +56,8 @@ export class BookPage implements OnInit {
         { value: 4, label: '12:00' }
       ]
     }
-  }, {
-    key: 'Vaccine',
-    type: 'input',
-    templateOptions: {
-      label: 'Vaccine',
-      placeholder: 'Vaccine',
-    }
   }];
-  constructor() { }
+  constructor(private http: ApiService) { }
 
   ngOnInit(): void {
   }
@@ -48,5 +65,25 @@ export class BookPage implements OnInit {
   bookAppointment() {
     console.log(this.model);
   }
+
+  async filterHospital(name: string) {
+    if (!this.model?.Vaccine) return [];
+    const hospitals = await firstValueFrom(this.http.getHospitals(this.model.Vaccine.value));
+    const options = hospitals.reduce((acc, vac) => {
+      acc.push({ value: vac.ID, name: vac.name })
+      return acc;
+    }, new Array<{ value: string | number, name: string }>())
+    return options;
+  }
+
+  async filterVaccines(name: string) {
+    const vaccines = await firstValueFrom(this.http.getVaccines());
+    const options = vaccines.reduce((acc, vac) => {
+      acc.push({ value: vac.id, name: vac.name })
+      return acc;
+    }, new Array<{ value: string | number, name: string }>())
+    return options;
+  }
+
 
 }

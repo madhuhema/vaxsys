@@ -72,7 +72,8 @@
               "browserTarget": "vaxsys:build:production"
             },
             "development": {
-              "browserTarget": "vaxsys:build:development"
+              "browserTarget": "vaxsys:build:development",
+              "proxyConfig": "src/proxy.config.json"
             }
           },
           "defaultConfiguration": "development"

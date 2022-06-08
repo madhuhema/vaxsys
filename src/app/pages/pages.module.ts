@@ -13,6 +13,9 @@ import { LoginPage } from './login/login.page';
 import { RegisterPage } from './register/register.page';
 import { AppointmentPage } from './appointment/appointment.page';
 import { BookPage } from './book/book.page';
+import { CoreModule } from '../@core/core.module';
+import { ApiService } from '../@core/services/api.service';
+import { ToastService } from '../@core/services/toast.service';
 
 
 
@@ -43,6 +46,10 @@ export function patternValidation(err: any, field: FormlyFieldConfig) {
     }),
     FormlyMaterialModule,
     RouterModule
+  ],
+  providers: [
+    ApiService,
+    ToastService
   ]
 })
 export class PagesModule { }

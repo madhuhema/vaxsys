@@ -3,14 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Appointment } from '../models/appointment';
 import { Supplier } from '../models/supplier';
-import { User } from '../models/User';
+import { User } from '../models/user';
 import { Vaccine } from '../models/vaccine';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  url: string = 'http://localhost:8080';
+  url: string = '/api';
 
   constructor(private http: HttpClient) { }
 
@@ -41,8 +41,8 @@ export class ApiService {
     return this.http.get<Array<Vaccine>>(`${this.url}/dashboard/vaccines`);
   }
 
-  getHospitals(): Observable<Array<Supplier>> {
-    return this.http.get<Array<Supplier>>(`${this.url}/dashboard/hospitalByVacId`);
+  getHospitals(vaccineId: number): Observable<Array<Supplier>> {
+    return this.http.post<Array<Supplier>>(`${this.url}/dashboard/hospitalByVacId?vaccineId=${vaccineId}`, vaccineId);
   }
 
   getVaccineAndDiseaseList() {
@@ -53,8 +53,8 @@ export class ApiService {
     return parseInt(localStorage.getItem('userId') || '');
   }
 
-  setUserId(userId: string) {
-    localStorage.setItem('userId', userId);
+  setUserId(userId: number) {
+    localStorage.setItem('userId', userId.toString());
   }
 
 }
